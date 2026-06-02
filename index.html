@@ -89,12 +89,15 @@ nav {
 
 .profile-bottom { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
 
-.pcard { background:var(--white); padding:26px 28px; border:1px solid var(--line); }
-.pcard:first-child { border-radius:0 0 0 var(--r); }
-.pcard:last-child  { border-radius:0 0 var(--r) 0; }
+.pcard { 
+  background:var(--white); 
+  padding:26px 28px; 
+  border:1px solid var(--line); 
+  border-radius: var(--r); 
+}
 
 .pcard-label {
-  font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
   color:var(--blue); margin-bottom:6px;
 }
 .pcard-divider { width:24px; height:2px; background:var(--blue); border-radius:2px; margin-bottom:16px; }
