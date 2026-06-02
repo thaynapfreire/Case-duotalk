@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thayná Freire — Duotalk</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+body { font-family:'Sora',sans-serif; background:#f4f6f9; color:#0f1e3d; -webkit-font-smoothing:antialiased; }
+
+:root {
+  --navy:    #0f1e3d;
+  --blue:    #1a6cf6;
+  --blue-lt: #e8f0fe;
+  --blue-bd: #c7d9fd;
+  --white:   #ffffff;
+  --bg:      #f4f6f9;
+  --line:    #e2e8f0;
+  --ink2:    #334155;
+  --ink3:    #64748b;
+  --ink4:    #94a3b8;
+  --green:   #059669;
+  --green-lt:#ecfdf5;
+  --green-bd:#a7f3d0;
+  --red:     #dc2626;
+  --r:       16px;
+}
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  height:50px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 40px;
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-name { font-size:12px; font-weight:600; color:var(--navy); }
+.nav-steps { display:flex; gap:5px; }
+.step-btn {
+  width:26px; height:26px; border-radius:50%;
+  border:1.5px solid var(--line); background:transparent;
+  cursor:pointer; font-size:11px; font-weight:600;
+  color:var(--ink4); font-family:'Sora',sans-serif;
+  transition:all .2s; display:flex; align-items:center; justify-content:center;
+}
+.step-btn:hover { border-color:var(--blue); color:var(--blue); }
+.step-btn.active { background:var(--blue); border-color:var(--blue); color:#fff; }
+
+.slide {
+  min-height:100vh; scroll-snap-align:start;
+  display:flex; align-items:center; justify-content:center;
+  padding:68px 40px 48px; background:var(--bg);
+}
+.inner { max-width:980px; width:100%; }
+
+@keyframes up { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.anim > * { opacity:0; animation:up .5s cubic-bezier(.22,1,.36,1) forwards; }
+.anim > *:nth-child(1){animation-delay:.05s}
+.anim > *:nth-child(2){animation-delay:.14s}
+.anim > *:nth-child(3){animation-delay:.23s}
+
+/* ════ SLIDE 1 ════ */
+
+.profile-header {
+  background:var(--navy);
+  border-radius:var(--r) var(--r) 0 0;
+  padding:36px 44px 32px;
+  margin-bottom:3px;
+}
+.profile-header h1 {
+  font-size:clamp(36px,5vw,56px);
+  font-weight:700; color:#fff;
+  letter-spacing:-.02em; line-height:1.05; margin-bottom:10px;
+}
+.profile-header .subtitle {
+  font-size:13px; font-weight:400;
+  color:rgba(255,255,255,.7); letter-spacing:.01em;
+}
+.profile-header .subtitle span { color:rgba(255,255,255,.3); margin:0 8px; }
+
+.profile-sobre {
+  background:var(--white); border:1px solid var(--line);
+  padding:26px 32px; margin-bottom:3px;
+}
+.profile-sobre .about-text {
+  font-size:13px; font-weight:300; color:var(--ink2); line-height:1.85;
+}
+
+.profile-bottom { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+
+.pcard { background:var(--white); padding:26px 28px; border:1px solid var(--line); }
+.pcard:first-child { border-radius:0 0 0 var(--r); }
+.pcard:last-child  { border-radius:0 0 var(--r) 0; }
+
+.pcard-label {
+  font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:6px;
+}
+.pcard-divider { width:24px; height:2px; background:var(--blue); border-radius:2px; margin-bottom:16px; }
+
+.pill-grid { display:flex; flex-wrap:wrap; gap:6px; }
+.pill {
+  font-size:11px; font-weight:500; color:var(--ink2);
+  background:var(--bg); border:1px solid var(--line);
+  border-radius:100px; padding:5px 12px;
+}
+.pill.hi { background:var(--blue-lt); color:var(--blue); border-color:var(--blue-bd); }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.entry { margin-bottom:12px; }
+.entry:last-child { margin-bottom:0; }
+.entry-name { font-size:13px; font-weight:600; color:var(--navy); margin-bottom:2px; }
+.entry-sub  { font-size:11px; font-weight:300; color:var(--ink4); }
+
+/* ════ SLIDE 2 ════ */
+
+.case-header-row {
+  display:grid;
+  grid-template-columns:1fr auto;
+  grid-template-rows:1fr 1fr;
+  gap:4px 24px;
+  background:var(--navy); border-radius:var(--r);
+  padding:20px 36px; margin-bottom:3px;
+}
+.case-kicker {
+  grid-column:1; grid-row:1;
+  font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(255,255,255,.5); align-self:end;
+}
+.case-title {
+  grid-column:1; grid-row:2;
+  font-size:clamp(15px,2vw,19px); font-weight:700; color:#fff;
+  letter-spacing:-.01em; line-height:1.25; white-space:nowrap; align-self:center;
+}
+.result-pill {
+  grid-column:2; grid-row:1/3; align-self:center;
+  background:#fff; border-radius:var(--r); padding:12px 26px; text-align:center;
+}
+.result-pill .rn {
+  font-size:36px; font-weight:700; color:var(--navy);
+  line-height:1; letter-spacing:-.03em;
+}
+.result-pill .rl {
+  font-size:9px; font-weight:700; color:var(--ink3);
+  letter-spacing:.1em; text-transform:uppercase; margin-top:3px;
+}
+
+.bento {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:auto auto; gap:3px;
+}
+.bc { background:var(--white); border:1px solid var(--line); padding:22px 24px; }
+.bc-wide { grid-column:1/3; }
+.bc-tall { grid-column:3; grid-row:1/3; border-radius:0 0 var(--r) 0; }
+.bc-bl   { border-radius:0 0 0 var(--r); }
+.bc-bm   { border-radius:0; }
+
+.bc-lbl {
+  font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:5px;
+}
+.bc-div { width:22px; height:2px; background:var(--blue); border-radius:2px; margin-bottom:16px; }
+.bc h3 { font-size:13px; font-weight:600; color:var(--navy); margin-bottom:8px; line-height:1.35; }
+.bc p  { font-size:12px; font-weight:300; color:var(--ink3); line-height:1.75; }
+.bc p strong { font-weight:600; color:var(--ink2); }
+
+.barchart { display:flex; flex-direction:column; gap:7px; margin-top:4px; }
+.bar-row { display:grid; grid-template-columns:62px 1fr 38px; align-items:center; gap:6px; }
+.bar-name { font-size:11px; color:var(--ink4); text-align:right; }
+.bar-track { background:var(--bg); border-radius:100px; height:6px; overflow:hidden; border:1px solid var(--line); }
+.bar-fill  { height:6px; border-radius:100px; }
+.bar-fill.red  { background:var(--red); }
+.bar-fill.blue { background:var(--blue); }
+.bar-val { font-size:10px; font-weight:600; color:var(--ink3); }
+
+.blist { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.blist li { font-size:12px; font-weight:300; color:var(--ink2); padding-left:14px; position:relative; line-height:1.6; }
+.blist li::before { content:''; position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background:var(--blue); }
+.blist li strong { font-weight:600; color:var(--navy); }
+
+.slist { display:flex; flex-direction:column; gap:10px; }
+.sitem { display:flex; gap:10px; align-items:flex-start; }
+.snum {
+  width:18px; height:18px; border-radius:50%; flex-shrink:0;
+  background:var(--blue-lt); color:var(--blue);
+  font-size:9px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; margin-top:1px;
+}
+.sitem p { font-size:12px; font-weight:300; color:var(--ink2); line-height:1.6; }
+.sitem p strong { font-weight:600; color:var(--navy); }
+
+.sol-pair { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
+.sol-item { background:var(--bg); border-radius:10px; padding:12px 14px; border:1px solid var(--line); }
+.si-tag   { font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink4); margin-bottom:5px; }
+.si-title { font-size:12px; font-weight:600; color:var(--navy); margin-bottom:4px; white-space:nowrap; }
+.si-desc  { font-size:11px; font-weight:300; color:var(--ink3); line-height:1.55; }
+
+.verbatim { background:var(--white); border:1.5px solid var(--line); border-radius:10px; padding:14px; margin-top:14px; }
+.vb-tag  { font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--blue); margin-bottom:6px; }
+.vb-text { font-size:13px; font-weight:300; font-style:italic; color:var(--navy); line-height:1.6; }
+
+@media(max-width:700px){
+  nav { padding:0 20px; }
+  .slide { padding:64px 16px 40px; }
+  .profile-bottom { grid-template-columns:1fr; }
+  .pcard:first-child { border-radius:0; }
+  .pcard:last-child  { border-radius:0 0 var(--r) var(--r); }
+  .bento { grid-template-columns:1fr; }
+  .bc-wide,.bc-tall,.bc-bl,.bc-bm { grid-column:1; grid-row:auto; border-radius:0; }
+  .bento .bc:last-child { border-radius:0 0 var(--r) var(--r); }
+  .case-header-row { grid-template-columns:1fr; grid-template-rows:auto auto auto; }
+  .result-pill { grid-column:1; grid-row:3; }
+  .two-col { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Thayná Freire · Duotalk</span>
+  <div class="nav-steps">
+    <button class="step-btn active" onclick="goTo(1)">1</button>
+    <button class="step-btn" onclick="goTo(2)">2</button>
+  </div>
+</nav>
+
+<!-- SLIDE 1 -->
+<section class="slide" id="slide1">
+  <div class="inner anim">
+
+    <div class="profile-header">
+      <h1>Thayná Freire</h1>
+      <p class="subtitle">Product Analyst <span>•</span> Data-Driven</p>
+    </div>
+
+    <div class="profile-sobre">
+      <p class="about-text">Minha jornada passou por UX Research, análise de dados e Product Analytics, e foi nessa interseção que encontrei onde gero mais valor: entender o comportamento do usuário em profundidade e traduzir isso em decisões estratégicas de produto. Gosto de investigar o porquê por trás dos números, não me interessa só acompanhar métrica, quero entender o que ela está dizendo, onde está a fricção real e como o produto pode evoluir a partir disso.<br><br>Utilizo SQL, Python e BI para explorar dados, mas sempre com o objetivo de transformar números em histórias que ajudem times de produto e negócio a tomar decisões mais conscientes. Trabalho bem no espaço entre o técnico e o estratégico: consigo ler dados, construir análises e sentar na mesa de discovery para questionar o porquê de uma aposta, colaborando de forma próxima com times de produto, engenharia e design.</p>
+    </div>
+
+    <div class="profile-bottom">
+      <div class="pcard">
+        <div class="pcard-label">Competências</div>
+        <div class="pcard-divider"></div>
+        <div class="pill-grid">
+          <span class="pill hi">Gestão de Backlog</span>
+          <span class="pill hi">UX Research</span>
+          <span class="pill hi">Análise de Dados</span>
+          <span class="pill">Scrum · Kanban</span>
+          <span class="pill">KPIs & Métricas</span>
+          <span class="pill">Discovery</span>
+          <span class="pill">Critérios de Aceite</span>
+          <span class="pill">Teste A/B</span>
+          <span class="pill">SQL</span>
+          <span class="pill">Python</span>
+          <span class="pill">Power BI</span>
+          <span class="pill">AWS</span>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="two-col">
+          <div>
+            <div class="pcard-label">Experiência</div>
+            <div class="pcard-divider"></div>
+            <div class="entry"><div class="entry-name">Itaú Unibanco</div><div class="entry-sub">Product Analyst · Out 2024 – Fev 2026</div></div>
+            <div class="entry"><div class="entry-name">Portal da Vela</div><div class="entry-sub">UX Researcher · Jun – Set 2023</div></div>
+            <div class="entry"><div class="entry-name">Flash Tattoo</div><div class="entry-sub">UX Researcher · Ago – Out 2021</div></div>
+          </div>
+          <div>
+            <div class="pcard-label">Formação</div>
+            <div class="pcard-divider"></div>
+            <div class="entry"><div class="entry-name">Ciência de Dados</div><div class="entry-sub">Cruzeiro do Sul · 2026–2028</div></div>
+            <div class="entry"><div class="entry-name">Gestão de TI</div><div class="entry-sub">Estácio · 2024–2026</div></div>
+            <div class="entry"><div class="entry-name">UX Design</div><div class="entry-sub">Tera · 2021</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide" id="slide2">
+  <div class="inner anim">
+
+    <div class="case-header-row">
+      <div class="case-kicker">Case: Bacen • Pagamento de Boletos</div>
+      <div class="case-title">Como reduzimos as entradas no Bacen em pagamentos</div>
+      <div class="result-pill">
+        <div class="rn">−40%</div>
+        <div class="rl">Entradas no Bacen</div>
+      </div>
+    </div>
+
+    <div class="bento">
+
+      <div class="bc bc-wide">
+        <div class="bc-lbl">Contexto & Priorização</div>
+        <div class="bc-div"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div>
+            <h3>Por que foi priorizado</h3>
+            <ul class="blist">
+              <li>OKR do banco: <strong>reduzir entradas no Bacen</strong></li>
+              <li>Produto de alto volume — mesmo <strong>&lt;2% de reclamações</strong> representa impacto regulatório real</li>
+              <li>Itaú liderava ranking de sentimentos negativos: <strong>15,05%</strong></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Análise competitiva de sentimentos</h3>
+            <div class="barchart">
+              <div class="bar-row"><span class="bar-name">Itaú</span><div class="bar-track"><div class="bar-fill red" style="width:100%"></div></div><span class="bar-val">15%</span></div>
+              <div class="bar-row"><span class="bar-name">BB</span><div class="bar-track"><div class="bar-fill red" style="width:91%"></div></div><span class="bar-val">13,7%</span></div>
+              <div class="bar-row"><span class="bar-name">Caixa</span><div class="bar-track"><div class="bar-fill red" style="width:82%"></div></div><span class="bar-val">12,3%</span></div>
+              <div class="bar-row"><span class="bar-name">Santander</span><div class="bar-track"><div class="bar-fill blue" style="width:64%"></div></div><span class="bar-val">9,6%</span></div>
+              <div class="bar-row"><span class="bar-name">Nubank</span><div class="bar-track"><div class="bar-fill blue" style="width:46%"></div></div><span class="bar-val">6,9%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bc bc-tall">
+        <div class="bc-lbl">Insight Central</div>
+        <div class="bc-div"></div>
+        <h3>O cliente queria rastreabilidade, não comprovante</h3>
+        <p style="margin-top:10px;">Jornada real descoberta:<br>cliente ia à agência → gerente ligava para a central → central não conseguia fornecer o status do repasse.<br><br><strong>Falha sistêmica de visibilidade.</strong></p>
+        <div class="verbatim">
+          <div class="vb-tag">Verbatim original</div>
+          <div class="vb-text">"Realizei um pagamento de boleto, o receptor não reconheceu o pagamento."</div>
+        </div>
+      </div>
+
+      <div class="bc bc-bl">
+        <div class="bc-lbl">Discovery</div>
+        <div class="bc-div"></div>
+        <div class="slist">
+          <div class="sitem"><span class="snum">1</span><p><strong>6 meses de reclamações</strong> analisados e cruzados com volume de pagamentos</p></div>
+          <div class="sitem"><span class="snum">2</span><p><strong>Clusterização por tema</strong> — principal ofensor: busca por comprovante de repasse</p></div>
+          <div class="sitem"><span class="snum">3</span><p><strong>2.066 comentários</strong> em análise competitiva — 96,5% positivos no mercado</p></div>
+          <div class="sitem"><span class="snum">4</span><p>Imersão na <strong>jornada completa</strong>: cliente → agência → central</p></div>
+        </div>
+      </div>
+
+      <div class="bc bc-bm">
+        <div class="bc-lbl">Solução em 2 Frentes</div>
+        <div class="bc-div"></div>
+        <div class="sol-pair">
+          <div class="sol-item">
+            <div class="si-tag">Curto prazo</div>
+            <div class="si-title">Script da Central</div>
+            <div class="si-desc">Atualização garantindo que o repasse é efetivado junto ao pagamento</div>
+          </div>
+          <div class="sol-item">
+            <div class="si-tag">Médio prazo</div>
+            <div class="si-title">Boleto 360°</div>
+            <div class="si-desc">Interface de status em tempo real para gerentes e central de atendimento</div>
+          </div>
+        </div>
+        <ul class="blist" style="margin-top:14px;">
+          <li>Participei do <strong>refinamento</strong> do Boleto 360°</li>
+          <li>Acompanhei métricas até a <strong>validação do resultado</strong></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const btns = document.querySelectorAll('.step-btn');
+function goTo(n){ document.getElementById('slide'+n).scrollIntoView({behavior:'smooth'}); }
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const idx = parseInt(e.target.id.replace('slide','')) - 1;
+    btns.forEach((b,i) => b.classList.toggle('active', i===idx));
+    e.target.querySelectorAll('.anim > *').forEach(el => {
+      el.style.animationName='none'; void el.offsetHeight; el.style.animationName='';
+    });
+  });
+}, {threshold:.4});
+slides.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
